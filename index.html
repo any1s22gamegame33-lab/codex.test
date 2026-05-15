@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#07130f" />
+    <title>Neon Reversi</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" aria-labelledby="game-title">
+      <section class="hero-card">
+        <div>
+          <p class="eyebrow">Mobile Rich Board Game</p>
+          <h1 id="game-title">Neon Reversi</h1>
+          <p class="lead">片手でも遊びやすい、光と反転アニメーションが気持ちいいスマホ向けリバーシ。</p>
+        </div>
+        <button id="new-game" class="glass-button" type="button">新しい対局</button>
+      </section>
+
+      <section class="score-row" aria-label="スコア">
+        <article class="score-card active" id="score-black-card">
+          <span class="disc-mini black"></span>
+          <div>
+            <p>Black</p>
+            <strong id="score-black">2</strong>
+          </div>
+        </article>
+        <article class="turn-card" aria-live="polite">
+          <span id="turn-orb" class="turn-orb black"></span>
+          <div>
+            <p>Turn</p>
+            <strong id="turn-label">Black</strong>
+          </div>
+        </article>
+        <article class="score-card" id="score-white-card">
+          <span class="disc-mini white"></span>
+          <div>
+            <p>White</p>
+            <strong id="score-white">2</strong>
+          </div>
+        </article>
+      </section>
+
+      <section class="board-wrap">
+        <div class="board-glow" aria-hidden="true"></div>
+        <div id="board" class="board" role="grid" aria-label="リバーシ盤"></div>
+      </section>
+
+      <section class="control-panel">
+        <p id="message" class="message" aria-live="polite">Black の番です。光っているマスに置けます。</p>
+        <div class="actions">
+          <button id="hint-toggle" class="pill-button" type="button" aria-pressed="true">ヒント ON</button>
+          <button id="undo" class="pill-button" type="button">1手戻す</button>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
