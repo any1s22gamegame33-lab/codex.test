@@ -1,1 +1,1 @@
-verify CDN deployment
+verify CDN deployment pass 2
