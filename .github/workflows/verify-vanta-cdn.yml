@@ -17,14 +17,17 @@ jobs:
         run: |
           set -euo pipefail
           BASE="https://cdn.jsdelivr.net/gh/any1s22gamegame33-lab/codex.test@3b2e38e9bc20aa5d86630bb92ec00f0c0f42cf56/vanta-bloom"
-          curl --fail --location --silent --show-error "$BASE/index.html" -o /tmp/index.html
-          curl --fail --location --silent --show-error "$BASE/styles.css" -o /tmp/styles.css
-          for file in game1.js game2.js game3.js game4.js; do
-            curl --fail --location --silent --show-error "$BASE/$file" -o "/tmp/$file"
+          for file in index.html styles.css game1.js game2.js game3.js game4.js; do
+            code=$(curl --location --silent --show-error --output "/tmp/$file" --write-out "%{http_code}" "$BASE/$file")
+            echo "$file HTTP $code SIZE $(wc -c < "/tmp/$file")"
+            test "$code" = "200"
+            test -s "/tmp/$file"
           done
           grep -q "VANTA BLOOM" /tmp/index.html
-          grep -q "garden" /tmp/game1.js
-          test -s /tmp/styles.css
-          test -s /tmp/game4.js
+          grep -q "game1.js" /tmp/index.html
+          grep -q "game4.js" /tmp/index.html
+          node --check /tmp/game1.js
+          node --check /tmp/game2.js
+          node --check /tmp/game3.js
+          node --check /tmp/game4.js
           echo "CDN_GAME_OK"
-          wc -c /tmp/index.html /tmp/styles.css /tmp/game1.js /tmp/game2.js /tmp/game3.js /tmp/game4.js
